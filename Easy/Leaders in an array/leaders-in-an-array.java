@@ -49,20 +49,14 @@ class Solution{
     //Function to find the leaders in the array.
     static ArrayList<Integer> leaders(int arr[], int n){
         // Your code here
-         ArrayList<Integer> result = new ArrayList<>();
-         
-        int maxRight = arr[n-1];
-        result.add(maxRight);
-        for(int i=n-2; i>=0; i--){
-            if(arr[i]>= maxRight){
-                maxRight = arr[i];
-                result.add(maxRight);
+         int max=Integer.MIN_VALUE;
+        ArrayList<Integer> list=new ArrayList<>();
+        for(int i=n-1;i>=0;i--){
+            if(max<=arr[i]){
+                max=arr[i];
+                list.add(0,max);
             }
         }
-         ArrayList<Integer> ans = new ArrayList<>();
-         for(int i= result.size()-1; i>=0; i--){
-             ans.add(result.get(i));
-         }
-         return ans;
+        return list;
     }
 }

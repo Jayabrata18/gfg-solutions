@@ -42,16 +42,16 @@ class Solution {
 
         // Your code here
         long totalSum=0;
-        for(int i=0;i<n; i++){
-            totalSum += arr[i];
+        for(int i=0; i<n; i++){
+            totalSum+=arr[i];
         }
         long leftSum=0;
         for(int i=0;i<n;i++){
-            totalSum -=arr[i];
-            if(leftSum==totalSum){
+            totalSum-=arr[i];
+            if(totalSum==leftSum){
                 return i+1;
             }else{
-                leftSum += arr[i];
+                leftSum+=arr[i];
             }
         }
         return -1;

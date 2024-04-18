@@ -25,26 +25,26 @@ class GFG {
 class Solution {
     public static ArrayList<Integer> duplicates(int arr[], int n) {
         // code here
-       ArrayList<Integer> duplicateList = new ArrayList<>();
-        HashSet<Integer> seenSet = new HashSet<>();
-        HashSet<Integer> duplicateSet = new HashSet<>();
-
-        for (int i = 0; i < n; i++) {
-            int element = arr[i];
-
-            if (!seenSet.add(element)) {
-                duplicateSet.add(element);
-            }
-        }
-
-        duplicateList.addAll(duplicateSet);
-
-        if (duplicateList.isEmpty()) {
-            duplicateList.add(-1);
-        } else {
-            duplicateList.sort(null);
-        }
-
-        return duplicateList;
+        ArrayList<Integer> result= new ArrayList<>();
+         
+         for(int i=0;i<arr.length;i++){
+             
+             int index = (int)arr[i]%n;
+             arr[index]+=n;
+             
+             
+         }
+         boolean found = false;
+         
+         for(int i=0;i<arr.length;i++){
+             if(arr[i]/n>1){
+                 found=true;
+                 result.add(i);
+             }
+         }
+         if(found==false){
+             result.add(-1);
+         }
+         return result;
     }
 }

@@ -37,32 +37,36 @@ class GFG {
 
 class Solution
 {    
-    //Function is to check whether two strings are anagram of each other or falset.
+    //Function is to check whether two strings are anagram of each other or not.
     public static boolean isAnagram(String a,String b)
     {
         
         // Your code here
-        if(a.length() != b.length()){
+        if (a.length() != b.length()) {
             return false;
         }
-        //increment for string a
-        Map<Character,Integer> count = new HashMap<>();
-        for(char c: a.toCharArray()){
-            count.put(c, count.getOrDefault(c,0)+1);
+        Map<Character, Integer> strCount = new HashMap<>();
+        
+        for(char str: a.toCharArray()){
+            strCount.put(str, strCount.getOrDefault(str, 0)+1);
         }
-        //decrment for  string b
-        for(char c: b.toCharArray()){
-            if(!count.containsKey(c) || count.get(c)==0){
+         for(char str: b.toCharArray()){
+            if(!strCount.containsKey(str)){
                 return false;
             }
-             count.put(c, count.get(c) - 1);
+            strCount.put(str, strCount.get(str)-1);
         }
-         // Check if all character frequencies are zero
-        // for (int frequency : count.values()) {
-        //     if (frequency != 0) {
-        //         return false;
-        //     }
-        // }
+           // Check if all counts in map are zero
+        for (int count : strCount.values()) {
+            if (count != 0) {
+                // If any count is not zero, strings are not anagrams
+                return false;
+            }
+        }
+        
+        // All counts are zero, strings are anagrams
         return true;
+       
+        
     }
 }

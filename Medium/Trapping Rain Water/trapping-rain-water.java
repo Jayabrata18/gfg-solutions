@@ -33,6 +33,8 @@ class Array {
 // } Driver Code Ends
 
 
+
+
 class Solution{
     
     // arr: input array
@@ -40,34 +42,32 @@ class Solution{
     // Function to find the trapped water between the blocks.
     static long trappingWater(int arr[], int n) { 
         // Your code here
-         if (n <= 2) {
-            return 0; // No water can be trapped with less than 3 blocks
+        long result = 0;
+
+        int left = 0, right = n - 1;
+        int leftMax = 0, rightMax = 0;
+
+        while (left < right) {
+            if (arr[left] < arr[right]) {
+                // Water can be trapped on the left side.
+                if (arr[left] > leftMax) {
+                    leftMax = arr[left];
+                } else {
+                    result += leftMax - arr[left];
+                }
+                left++;
+            } else {
+                // Water can be trapped on the right side.
+                if (arr[right] > rightMax) {
+                    rightMax = arr[right];
+                } else {
+                    result += rightMax - arr[right];
+                }
+                right--;
+            }
         }
 
-        long trappedWater = 0;
-
-        // Arrays to store the maximum height on the left and right of each index
-        int[] leftMax = new int[n];
-        int[] rightMax = new int[n];
-
-        // Initialize leftMax array
-        leftMax[0] = arr[0];
-        for (int i = 1; i < n; i++) {
-            leftMax[i] = Math.max(leftMax[i - 1], arr[i]);
-        }
-
-        // Initialize rightMax array
-        rightMax[n - 1] = arr[n - 1];
-        for (int i = n - 2; i >= 0; i--) {
-            rightMax[i] = Math.max(rightMax[i + 1], arr[i]);
-        }
-
-        // Calculate trapped water at each index
-        for (int i = 1; i < n - 1; i++) {
-            trappedWater += Math.max(0, Math.min(leftMax[i], rightMax[i]) - arr[i]);
-        }
-
-        return trappedWater;
+        return result;
     } 
 }
 

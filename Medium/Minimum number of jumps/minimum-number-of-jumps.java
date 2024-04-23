@@ -26,10 +26,12 @@ class GFG
 // } Driver Code Ends
 
 
+
+
 class Solution{
     static int minJumps(int[] arr){
         // your code here
-         int n = arr.length;
+        int n = arr.length;
 
         if (n <= 1) {
             return 0; // Already at the end or there is only one element
@@ -38,31 +40,26 @@ class Solution{
         if (arr[0] == 0) {
             return -1; // Cannot move if the first element is 0
         }
-
-        int maxReach = arr[0]; // Maximum reachable index
-        int steps = arr[0];    // Number of steps at the current position
-        int jumps = 1;         // Number of jumps
-
-        for (int i = 1; i < n; i++) {
-            if (i == n - 1) {
-                return jumps; // Reached the end
-            }
-
-            maxReach = Math.max(maxReach, i + arr[i]);
-
-            steps--;
-
-            if (steps == 0) {
-                jumps++;
-
-                if (i >= maxReach) {
-                    return -1; // Cannot move further
+        
+        int totalJump =0;
+        int destination = arr.length-1;
+        int coverage =0;
+        int lastJumpLeft =0;
+        
+        for(int i=0;i<n;i++) {
+            coverage = Math.max(coverage,i+arr[i]);
+            
+            if(i==lastJumpLeft) {
+                lastJumpLeft = coverage;
+                totalJump++;
+                
+                if(coverage>=destination) {
+                    return totalJump;
                 }
-
-                steps = maxReach - i;
             }
         }
+        return -1;
 
-        return -1; 
+      
     }
 }

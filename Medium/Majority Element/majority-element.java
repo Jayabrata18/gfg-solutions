@@ -31,35 +31,19 @@ class Geeks
 
 class Solution
 {
-    static int majorityElement(int a[], int size)
+    static int majorityElement(int a[], int N)
     {
         // your code here
-   
-        Arrays.sort(a);
-        int candidate = a[0];
-        int count = 1;
-        for(int i=0; i<size; i++){
-            if(a[i]==candidate){
-                count++;
-            }else{
-                count--;
-            }
-            if(count==0){
-                candidate=a[i];
-                count=1;
+       HashMap<Integer, Integer> find = new HashMap<>();
+       
+       for(int num : a){
+           find.put(num, find.getOrDefault(num,0)+1);
+       }
+        for (int num : find.keySet()) {
+            if (find.get(num) > N / 2) {
+                return num;
             }
         }
-        int candidateCount = 0;
-        for (int i = 0; i < size; i++) {
-            if (a[i] == candidate) {
-                candidateCount++;
-            }
-        }
-
-        if (candidateCount > size / 2) {
-            return candidate;
-        } else {
-            return -1; 
-            }
+        return -1;
     }
 }
